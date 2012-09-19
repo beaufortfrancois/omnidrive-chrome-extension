@@ -79,12 +79,8 @@ function search(query, callback) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.setRequestHeader('Authorization', 'OAuth ' + google.getAccessToken())
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            callback(xhr.response);
-        }
-    }
-    xhr.send(null);
+    xhr.onload = function () { callback(xhr.response); }
+    xhr.send();
     return xhr;
 }
 
