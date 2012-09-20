@@ -14,7 +14,7 @@
   },
 
   "permissions": [ "tabs", "http://www.googleapis.com/", "https://accounts.google.com/o/oauth2/token" ],
-  "version": "1.2",
+  "version": "1.2.1",
 
 "content_scripts": [
   {
