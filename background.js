@@ -14,7 +14,9 @@ var google = new OAuth2('google', {
  */
 
 chrome.omnibox.onInputStarted.addListener(function () {
-    google.authorize();
+    if (google.getAccessToken() === undefined || google.isAccessTokenExpired()) {
+        google.authorize();
+    }
 });
 
 
