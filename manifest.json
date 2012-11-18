@@ -1,5 +1,6 @@
 {
   "background": {
+    "persistent": false,
     "scripts": [ "oauth2/oauth2.js", "background.js"]
   },
   "description": "Add support to the omnibox to search in Google Drive.",
@@ -16,12 +17,13 @@
   "permissions": [ "tabs", "http://www.googleapis.com/", "https://accounts.google.com/o/oauth2/token" ],
   "version": "1.2.1",
 
-"content_scripts": [
-  {
-    "matches": ["http://www.google.com/robots.txt*"],
-    "js": ["oauth2/oauth2_inject.js"],
-    "run_at": "document_start"
-  }
-],
+  "content_scripts": [
+    {
+      "matches": ["http://www.google.com/robots.txt*"],
+      "js": ["oauth2/oauth2_inject.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "minimum_chrome_version": "22",
   "manifest_version": 2
 }
