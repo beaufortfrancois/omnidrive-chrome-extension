@@ -1,4 +1,9 @@
 const LOGIN_TEXT = 'Click here to authenticate...';
+const NEW_DOC = 'new doc';
+const NEW_SHEET = 'new sheet';
+const NEW_SLIDE = 'new slide';
+const NEW_DRAWING = 'new drawing';
+const NEW_FORM = 'new form';
 
 /**
  * We keep track of the request object in order to cancel it easily.
@@ -15,6 +20,16 @@ var xhr = null;
 chrome.omnibox.onInputEntered.addListener(function (text) {
     if (text == LOGIN_TEXT) {
         chrome.identity.getAuthToken({ 'interactive': true }, function() {});
+    } else if (text == NEW_DOC) {
+        chrome.tabs.update({ url: 'https://docs.google.com/create' });
+    } else if (text == NEW_SHEET) {
+        chrome.tabs.update({ url: 'https://sheets.google.com/create' });
+    } else if (text == NEW_SLIDE) {
+        chrome.tabs.update({ url: 'https://slides.google.com/create' });
+    } else if (text == NEW_DRAWING) {
+        chrome.tabs.update({ url: 'https://drawings.google.com/create' });
+    } else if (text == NEW_FORM) {
+        chrome.tabs.update({ url: 'https://forms.google.com/create' });
     } else if (/^https:\/\/docs.google.com\//.test(text)) {
         chrome.tabs.update({ url: text });
     } else {
