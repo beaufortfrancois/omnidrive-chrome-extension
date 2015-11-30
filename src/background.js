@@ -32,6 +32,8 @@ chrome.omnibox.onInputEntered.addListener(function (text) {
         chrome.tabs.update({ url: 'https://forms.google.com/create' });
     } else if (/^https:\/\/docs.google.com\//.test(text)) {
         chrome.tabs.update({ url: text });
+    } else if (/^https:\/\/drive.google.com\//.test(text)) {
+        chrome.tabs.update({ url: text });
     } else {
         chrome.tabs.update({ url: 'https://drive.google.com/#search/' + text });
     }
