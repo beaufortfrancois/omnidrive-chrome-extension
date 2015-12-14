@@ -30,7 +30,7 @@ chrome.omnibox.onInputEntered.addListener(function (text) {
         chrome.tabs.update({ url: 'https://drawings.google.com/create' });
     } else if (text == NEW_FORM) {
         chrome.tabs.update({ url: 'https://forms.google.com/create' });
-    } else if (/^https:\/\/docs.google.com\//.test(text)) {
+    } else if (/^https:\/\/(docs|drive).google.com\//.test(text)) {
         chrome.tabs.update({ url: text });
     } else {
         chrome.tabs.update({ url: 'https://drive.google.com/#search/' + text });
