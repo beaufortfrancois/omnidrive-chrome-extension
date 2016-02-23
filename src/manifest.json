@@ -19,7 +19,7 @@
     "scopes": [ "https://www.googleapis.com/auth/drive.readonly" ]
   },
   "permissions": [ "identity" ],
-  "version": "3.3",
+  "version": "3.4",
 
   "minimum_chrome_version": "29",
   "manifest_version": 2
