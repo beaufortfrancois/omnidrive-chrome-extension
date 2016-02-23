@@ -11,6 +11,11 @@ const NEW_FORM = 'new form';
 
 var xhr = null;
 
+/**
+ * We keep track of the timeout ID to delay requests to Google Drive.
+ */
+
+var timeoutId = null;
 
 /**
  * If user hits <Enter> key, open a tab to Google Drive Web Search if text
@@ -38,11 +43,16 @@ chrome.omnibox.onInputEntered.addListener(function (text) {
 });
 
 
+chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(function() {
+    onInputChanged(text, suggest);
+  }, 200);
+});
+
 /**
  * Ask Google Drive API Search when user enters something in the omnibox.
  */
-
-chrome.omnibox.onInputChanged.addListener(onInputChanged);
 
 function onInputChanged(text, suggest) {
     var url = 'https://www.googleapis.com/drive/v2/files?' +
