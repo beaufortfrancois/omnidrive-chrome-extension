@@ -55,9 +55,11 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
  */
 
 function onInputChanged(text, suggest) {
-    var url = 'https://www.googleapis.com/drive/v2/files?' +
-              'maxResults=5&fields=items(alternateLink%2Ctitle)&' +
-              'q=fullText+contains+"' + text + '"';
+    var url = 'https://www.googleapis.com/drive/v2/files';
+    var params = new URLSearchParams();
+    params.append('maxResults', 5)
+    params.append('fields', 'items(alternateLink,title)')
+    params.append('q','fullText contains "' + text + '"');
 
     if (xhr !== null) {
         xhr.onreadystatechange = null;
@@ -71,7 +73,7 @@ function onInputChanged(text, suggest) {
             return;
         }
         xhr = new XMLHttpRequest();
-        xhr.open('GET', url);
+        xhr.open('GET', url + '?' + params.toString());
         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         xhr.responseType = 'json';
         xhr.onloadend = function () {
