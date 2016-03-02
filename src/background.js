@@ -51,6 +51,19 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 });
 
 /**
+ * Escape entities to avoid XML parsing issues with arbitrary document titles
+ *   github.com/kurrik/chrome-extensions/tree/master/omnibox-escaping
+ */
+function sanitizeItemTitle(title) {
+    return title.replace(/"/g,"&quot;")
+        .replace(/'/g,"&apos")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/&/g,"&amp;");
+}
+
+
+/**
  * Ask Google Drive API Search when user enters something in the omnibox.
  */
 
@@ -80,7 +93,7 @@ function onInputChanged(text, suggest) {
                 xhr.response.items.forEach(function(item) {
                     results.push({
                         content: item.alternateLink,
-                        description: item.title
+                        description: sanitizeItemTitle(item.title)
                     });
                 });
                 suggest(results);
