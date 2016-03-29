@@ -47,7 +47,7 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
   clearTimeout(timeoutId);
   timeoutId = setTimeout(function() {
     onInputChanged(text, suggest);
-  }, 200);
+  }, 300);
 });
 
 /**
