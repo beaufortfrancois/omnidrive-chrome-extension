@@ -93,6 +93,10 @@ function onInputChanged(text, suggest) {
             if (xhr.status == 200) {
                 var results = [];
                 xhr.response.items.forEach(function(item) {
+                    folderIdStart = item.alternateLink.indexOf("folderview?id="); // If it's a folder, adapt url
+                    if(folderIdStart!= -1){
+                        item.alternateLink = 'https://drive.google.com/drive/folders/'+item.alternateLink.substring(folderIdStart+14, item.alternateLink.indexOf('&', folderIdStart+14));
+                    }
                     results.push({
                         content: item.alternateLink,
                         description: sanitizeItemTitle(item.title)
