@@ -71,7 +71,7 @@ function onInputChanged(text, suggest) {
     var url = 'https://www.googleapis.com/drive/v2/files';
     var params = new URLSearchParams();
     params.append('maxResults', 5)
-    params.append('fields', 'items(alternateLink,title)')
+    params.append('fields', 'items(alternateLink,title,id,mimeType)')
     params.append('q','fullText contains "' + text + '"');
 
     if (xhr !== null) {
@@ -93,6 +93,9 @@ function onInputChanged(text, suggest) {
             if (xhr.status == 200) {
                 var results = [];
                 xhr.response.items.forEach(function(item) {
+                    if (item.mimeType == 'application/vnd.google-apps.folder') {
+                        item.alternateLink = 'https://drive.google.com/drive/folders/' + item.id;
+                    }
                     results.push({
                         content: item.alternateLink,
                         description: sanitizeItemTitle(item.title)
